@@ -1,8 +1,18 @@
 import pandas as pd
 import sqlite3
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Auditor de Llamadas IFT + OSINT")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 DB_PATH = "numeracion_ift.db"
 
 def inicializar_bd(csv_path: str):
